@@ -1,69 +1,74 @@
 <template>
-    <div class="elem">
+  <div class="container">
+    <div class="post-wrapper">
+      <div class="post" v-for="post in posts">
+        <div><strong>Название:</strong> {{ post.title }}</div>
         <div>
-            Количество лайков: <strong>{{likes}}</strong>
-        </div>
+          <strong>Описание:</strong> {{ post.description }}</div>        
+      </div>      
     </div>
-    <div class="elem">
-        <div>
-            Количество дизлайков: <strong>{{dislikes}}</strong>
-        </div>
-    </div>
-    <div class="bttn-wrapper">
-        <div>
-            <button v-on:click="addLike">Like</button>
-        </div>
-        <div>
-            <button @click="addDislike">Dislike</button>
-        </div>
-    </div>
+  </div>
 </template>
 <script>
 export default {
-    data() {
-        return {
-            likes: 10,
-            dislikes: 0,
-        }
-    },
-    methods: {
-        addLike(){
-            this.likes +=1;
-        },
-        addDislike(){
-            this.dislikes +=1;
-        }
-    }
-}
+  data() {
+    return {
+        posts: [
+            {
+                id:1,
+                title: 'JavaScript',
+                description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore magni reprehenderit eaque a, odio eveniet, cumque doloribus velit beatae soluta vel dignissimos ex. Perspiciatis facilis distinctio a voluptates perferendis ea!',
+            },
+            {
+                id:2,
+                title: 'JavaScript',
+                description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore magni reprehenderit eaque a, odio eveniet ex. Perspiciatis facilis distinctio a voluptates perferendis ea!',
+            },
+            {
+                id:3,
+                title: 'JavaScript',
+                description: 'Lorem ipsum dolor sit amet, cumque doloribus velit beatae soluta vel dignissimos consectetur adipisicing elit. Labore magni reprehenderit eaque a, odio eveniet, cumque doloribus velit beatae soluta vel dignissimos ex. Perspiciatis facilis distinctio a voluptates perferendis ea!',
+            },
+            {
+                id:4,
+                title: 'JavaScript',
+                description: 'Lorem ipsum dolor sit amet, cumque  a voluptates perferendis ea!',
+            }
+        ]
+    };
+  },
+  methods: {},
+};
 </script>
-<style scope>
-
-    *{
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
-    }
-    .elem{
-        padding: 10px;
-    }
-    .bttn-wrapper{
-        display: flex;
-        gap: 10px;
-        padding: 10px;
-    }
-    button{
-        background: aqua;
-        border: 1px solid aqua;
-        padding: 10px 20px;
-        border-radius: 8px;
-        font-weight: bold;
-    }
-    button:hover{
-        transform: translateY(2px) scale(.97);
-        box-shadow: 2px 2px 4px #a8a4a4;
-    }
-    button:active{
-        opacity: .5;
-        transform: scale(.9);
-    }
+<style>
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  padding: 50px 0;
+  font-size: 20px;
+}
+.container {
+  max-width: 1200px;
+  padding: 0 16px;
+  margin: 0 auto;
+}
+.post-wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.post {
+  padding: 14px;
+  border: 1px solid #656565;
+  border-radius: 8px;
+}
+.post:hover {
+  background: #f3f3f39c;
+  border: 1px solid #6565655f;
+  transition: 0.5s linear;
+  cursor: default;
+}
 </style>
