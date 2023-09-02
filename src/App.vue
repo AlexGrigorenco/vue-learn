@@ -7,6 +7,23 @@
           <strong>Описание:</strong> {{ post.description }}</div>        
       </div>      
     </div>
+    <div class="form-wrapper">
+        <form @submit.prevent>
+            <input 
+            @input="newPost.title = $event.target.value"
+            v-bind:value="newPost.title"
+            type="text" 
+            placeholder="Введите название поста">
+            <input 
+            @input="newPost.description = $event.target.value"
+            v-bind:value="newPost.description"
+            type="text" 
+            placeholder="Введите описание поста">
+            <div>
+                <button @click="createPost">Создать</button>
+            </div>
+        </form>
+    </div>
   </div>
 </template>
 <script>
@@ -34,10 +51,23 @@ export default {
                 title: 'JavaScript',
                 description: 'Lorem ipsum dolor sit amet, cumque  a voluptates perferendis ea!',
             }
-        ]
+        ],
+        newPost: {
+            title: '',
+            description: '',
+        },
     };
   },
-  methods: {},
+  methods: {
+    createPost(){
+        const newPost = {...this.newPost};
+        newPost.id = Date.now();
+        this.posts.push(newPost);
+
+        this.newPost.title = '';
+        this.newPost.description = '';
+    }
+  },
 };
 </script>
 <style>
@@ -54,6 +84,10 @@ body {
   max-width: 1200px;
   padding: 0 16px;
   margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 .post-wrapper{
     display: flex;
@@ -70,5 +104,39 @@ body {
   border: 1px solid #6565655f;
   transition: 0.5s linear;
   cursor: default;
+}
+.form-wrapper{
+    padding: 20px 10px;
+    background: #f3f3f39c;
+    border-radius: 8px;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    background: #fff;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 8px;
+}
+form input{
+    padding: 6px 2px;
+    font-size: 18px;
+    border-radius: 8px;
+    border: 1px solid #656565;
+}
+form button{
+    padding: 6px 10px;
+    font-size: 18px;
+    border-radius: 6px;
+    background: rgb(84, 162, 84);
+    border: 1px solid rgb(84, 162, 84);
+    color: #fff;
+}
+form button:hover{
+    background: #fff;
+    color: rgb(84, 162, 84);
+    transition: .4s linear;
 }
 </style>
