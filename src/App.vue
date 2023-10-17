@@ -1,6 +1,16 @@
 <template>
   <div class="container">
-    <post-list :posts="posts" />
+
+    <div 
+    v-if="!posts.length"
+    class="alert">
+      Список постов пуст!
+    </div>
+
+    <post-list 
+    v-if="posts.length"
+    :posts="posts"
+    @removePost="removePost" />
     <create-post-form @createPost="createPost" />
   </div>
 </template>
@@ -50,6 +60,9 @@ export default {
     createPost(post) {
       this.posts.push(post);
     },
+    removePost(post){
+      this.posts = this.posts.filter(postItem => postItem.id !== post.id);
+    }
   },
 };
 </script>
@@ -72,5 +85,22 @@ body {
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+.alert{
+  color: red;
+  text-align: center;
+  font-size: 26px;
+  animation: pulse 1s linear infinite ;
+}
+@keyframes pulse {
+  0%{
+    opacity: 0;
+  }
+  50%{
+    opacity: 1;
+  }
+  100%{
+    opacity: 0;
+  }
 }
 </style>

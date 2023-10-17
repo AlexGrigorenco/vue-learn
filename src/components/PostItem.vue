@@ -6,7 +6,9 @@
           <strong>Описание:</strong> {{ post.description }}</div>        
       </div>  
       <div>
-        <my-button>Удалить</my-button>
+        <my-button
+        @click="$emit('removePost', post)"
+        >Удалить</my-button>
       </div>
         </div> 
 </template>
@@ -20,7 +22,7 @@ export default {
             type: Object,
             required: true,
         }
-    }
+    },
 }
 </script>
 
