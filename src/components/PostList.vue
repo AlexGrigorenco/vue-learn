@@ -1,8 +1,9 @@
 <template>
     <div class="post-wrapper">
         <h3>Список Постов</h3>
-         <PostItem 
+         <post-item 
          v-for="post in posts"
+         :key="post.id"
          :post="post"
          />
     </div>

@@ -12,14 +12,22 @@
         placeholder="Введите описание поста"
       />
       <div>
-        <button @click="createPost">Создать</button>
+        <my-button @click="createPost">Создать</my-button>
       </div>
     </form>
   </div>
 </template>
 
 <script>
+
+import MyButton from './UI/MyButton.vue';
+
 export default {
+
+  components: { 
+    MyButton 
+  },
+
     data(){
         return{
             newPost: {
@@ -63,18 +71,5 @@ form input {
   font-size: 18px;
   border-radius: 8px;
   border: 1px solid #656565;
-}
-form button {
-  padding: 6px 10px;
-  font-size: 18px;
-  border-radius: 6px;
-  background: rgb(84, 162, 84);
-  border: 1px solid rgb(84, 162, 84);
-  color: #fff;
-}
-form button:hover {
-  background: #fff;
-  color: rgb(84, 162, 84);
-  transition: 0.4s linear;
 }
 </style>

@@ -1,51 +1,58 @@
 <template>
   <div class="container">
-    <PostList :posts="posts" />
-    <CreatePostForm  @createPost="createPost" />
-    
+    <post-list :posts="posts" />
+    <create-post-form @createPost="createPost" />
   </div>
 </template>
 <script>
-import PostList from '@/components/PostList';
-import CreatePostForm from '@/components/CreatePostForm';
+import PostList from "@/components/PostList";
+import CreatePostForm from "@/components/CreatePostForm";
+
 export default {
   components: {
-    PostList, CreatePostForm
+    PostList,
+    CreatePostForm,
   },
+
   data() {
     return {
-        posts: [
-            {
-                id:1,
-                title: 'JavaScript',
-                description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore magni reprehenderit eaque a, odio eveniet, cumque doloribus velit beatae soluta vel dignissimos ex. Perspiciatis facilis distinctio a voluptates perferendis ea!',
-            },
-            {
-                id:2,
-                title: 'JavaScript',
-                description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore magni reprehenderit eaque a, odio eveniet ex. Perspiciatis facilis distinctio a voluptates perferendis ea!',
-            },
-            {
-                id:3,
-                title: 'JavaScript',
-                description: 'Lorem ipsum dolor sit amet, cumque doloribus velit beatae soluta vel dignissimos consectetur adipisicing elit. Labore magni reprehenderit eaque a, odio eveniet, cumque doloribus velit beatae soluta vel dignissimos ex. Perspiciatis facilis distinctio a voluptates perferendis ea!',
-            },
-            {
-                id:4,
-                title: 'JavaScript',
-                description: 'Lorem ipsum dolor sit amet, cumque  a voluptates perferendis ea!',
-            }
-        ],
-        
+      posts: [
+        {
+          id: 1,
+          title: "JavaScript",
+          description:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore magni reprehenderit eaque a, odio eveniet, cumque doloribus velit beatae soluta vel dignissimos ex. Perspiciatis facilis distinctio a voluptates perferendis ea!",
+        },
+        {
+          id: 2,
+          title: "JavaScript",
+          description:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore magni reprehenderit eaque a, odio eveniet ex. Perspiciatis facilis distinctio a voluptates perferendis ea!",
+        },
+        {
+          id: 3,
+          title: "JavaScript",
+          description:
+            "Lorem ipsum dolor sit amet, cumque doloribus velit beatae soluta vel dignissimos consectetur adipisicing elit. Labore magni reprehenderit eaque a, odio eveniet, cumque doloribus velit beatae soluta vel dignissimos ex. Perspiciatis facilis distinctio a voluptates perferendis ea!",
+        },
+        {
+          id: 4,
+          title: "JavaScript",
+          description:
+            "Lorem ipsum dolor sit amet, cumque  a voluptates perferendis ea!",
+        },
+      ],
     };
   },
+
   methods: {
-    createPost(post){
-      this.posts.push(post)
-    }
-  }
+    createPost(post) {
+      this.posts.push(post);
+    },
+  },
 };
 </script>
+
 <style>
 * {
   padding: 0;
@@ -65,5 +72,4 @@ body {
   flex-direction: column;
   gap: 20px;
 }
-
 </style>
