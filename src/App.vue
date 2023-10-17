@@ -5,6 +5,7 @@
   </div>
 </template>
 <script>
+
 import PostList from "@/components/PostList";
 import CreatePostForm from "@/components/CreatePostForm";
 

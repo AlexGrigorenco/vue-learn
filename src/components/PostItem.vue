@@ -13,20 +13,15 @@
 
 <script>
 
-import MyButton from './UI/MyButton.vue';
+export default {
 
-    export default {
-  components: { 
-    MyButton 
-},
-
-props: {
-    post:{
-        type: Object,
-        required: true,
+    props: {
+        post:{
+            type: Object,
+            required: true,
+        }
     }
 }
-    }
 </script>
 
 <style scoped>
