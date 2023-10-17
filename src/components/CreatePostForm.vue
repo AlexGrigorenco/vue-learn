@@ -1,13 +1,13 @@
 <template>
   <div class="form-wrapper">
     <form @submit.prevent>
-      <input
-        v-model="newPost.title"
+      <my-input
+        v-model:value="newPost.title"
         type="text"
         placeholder="Введите название поста"
       />
-      <input
-        v-model="newPost.description"
+      <my-input
+        v-model:value="newPost.description"
         type="text"
         placeholder="Введите описание поста"
       />
@@ -59,11 +59,5 @@ form {
   margin: 0 auto;
   padding: 20px;
   border-radius: 8px;
-}
-form input {
-  padding: 6px 2px;
-  font-size: 18px;
-  border-radius: 8px;
-  border: 1px solid #656565;
 }
 </style>
