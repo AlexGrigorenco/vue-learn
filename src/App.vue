@@ -1,6 +1,17 @@
 <template>
   <div class="container">
 
+    <div style="display: flex; justify-content: end;">
+      <my-button
+      @click="modalVisible = true"
+      >Создать новый пост</my-button>
+    </div>
+
+    <my-modal 
+    v-model:show="modalVisible">
+        <create-post-form @createPost="createPost" />
+    </my-modal>
+
     <div 
     v-if="!posts.length"
     class="alert">
@@ -11,7 +22,8 @@
     v-if="posts.length"
     :posts="posts"
     @removePost="removePost" />
-    <create-post-form @createPost="createPost" />
+
+    
   </div>
 </template>
 <script>
@@ -53,12 +65,14 @@ export default {
             "Lorem ipsum dolor sit amet, cumque  a voluptates perferendis ea!",
         },
       ],
+      modalVisible: false,
     };
   },
 
   methods: {
     createPost(post) {
       this.posts.push(post);
+      this.modalVisible = false;
     },
     removePost(post){
       this.posts = this.posts.filter(postItem => postItem.id !== post.id);
