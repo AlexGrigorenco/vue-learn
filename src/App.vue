@@ -1,37 +1,38 @@
 <template>
   <div class="container">
-
     <div class="bttn-wrapper">
-      <div>
+      <div v-if="!posts.length">
         <my-button
-      @click="modalVisible = true"
-      >Создать новый пост</my-button>
+          title="загрузить новый список постов"
+          @click="getPostsFromApi"
+        >
+          получить посты
+        </my-button>
+      </div>
+      <div>
+        <my-button @click="modalVisible = true">Создать новый пост</my-button>
       </div>
     </div>
 
-    
+    <hr />
 
-    <my-modal 
-    v-model:show="modalVisible">
-        <create-post-form @createPost="createPost" />
+    <my-modal v-model:show="modalVisible">
+      <create-post-form @createPost="createPost" />
     </my-modal>
 
-    <div 
-    v-if="!posts.length"
-    class="alert">
-      Список постов пуст!
+    <div v-if="!posts.length" class="alert">Список постов пуст!</div>
+
+    <div>
+      <div class="sort-wrapper">
+        <my-select v-model="selectedSort" :options="sortOptions" />
+      </div>
+      <post-list v-if="posts.length" :posts="posts" @removePost="removePost" />
     </div>
 
-    <post-list 
-    v-if="posts.length"
-    :posts="posts"
-    @removePost="removePost" />
-
-    <my-loader v-if="loaderVisible"/>
+    <my-loader v-if="loaderVisible" />
   </div>
 </template>
 <script>
-
 import PostList from "@/components/PostList";
 import CreatePostForm from "@/components/CreatePostForm";
 import { getPosts } from "@/api";
@@ -42,7 +43,7 @@ export default {
     CreatePostForm,
   },
 
-  created(){
+  created() {
     this.getPostsFromApi();
   },
 
@@ -51,6 +52,17 @@ export default {
       posts: [],
       modalVisible: false,
       loaderVisible: false,
+      selectedSort: '',
+      sortOptions: [
+        {
+          value: 'title',
+          name: 'по заголовку'
+        },
+        {
+          value: 'body',
+          name: 'по описанию'
+        }
+      ]
     };
   },
 
@@ -59,15 +71,23 @@ export default {
       this.posts.push(post);
       this.modalVisible = false;
     },
-    removePost(post){
-      this.posts = this.posts.filter(postItem => postItem.id !== post.id);
+    removePost(post) {
+      this.posts = this.posts.filter((postItem) => postItem.id !== post.id);
     },
-    async getPostsFromApi(){
+    async getPostsFromApi() {
       this.loaderVisible = true;
       this.posts = await getPosts();
       this.loaderVisible = false;
-    }
+    },
   },
+
+  watch: {
+    selectedSort(newValue){
+      this.posts.sort((a, b) => {
+        return a[newValue].localeCompare(b[newValue])
+      })
+    }
+  }
 };
 </script>
 
@@ -90,27 +110,29 @@ body {
   flex-direction: column;
   gap: 20px;
 }
-.alert{
+.alert {
   color: red;
   text-align: center;
   font-size: 26px;
-  animation: pulse 1s linear infinite ;
+  animation: pulse 1s linear infinite;
 }
-.bttn-wrapper{
+.sort-wrapper,
+.bttn-wrapper {
   display: flex;
   align-items: center;
   justify-content: flex-end;
   gap: 20px;
   flex-wrap: wrap;
+  padding: 10px 0;
 }
 @keyframes pulse {
-  0%{
+  0% {
     opacity: 0;
   }
-  50%{
+  50% {
     opacity: 1;
   }
-  100%{
+  100% {
     opacity: 0;
   }
 }
