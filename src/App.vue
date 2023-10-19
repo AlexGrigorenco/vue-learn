@@ -3,12 +3,6 @@
 
     <div class="bttn-wrapper">
       <div>
-      <my-button
-    @click="getPostsFromApi">
-      получить посты
-    </my-button>
-    </div>
-      <div>
         <my-button
       @click="modalVisible = true"
       >Создать новый пост</my-button>
@@ -46,6 +40,10 @@ export default {
   components: {
     PostList,
     CreatePostForm,
+  },
+
+  created(){
+    this.getPostsFromApi();
   },
 
   data() {
