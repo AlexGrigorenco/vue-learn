@@ -1,14 +1,16 @@
 <template>
   <div class="container">
     <div class="bttn-wrapper">
-      <div v-if="!posts.length">
-        <my-button
-          title="загрузить новый список постов"
-          @click="getPostsFromApi"
-        >
-          получить посты
-        </my-button>
-      </div>
+      <transition name="fade">
+        <div v-if="!posts.length">
+            <my-button
+            title="загрузить новый список постов"
+            @click="getPostsFromApi"
+          >
+            получить посты
+          </my-button>
+        </div>
+    </transition>
       <div>
         <my-button @click="modalVisible = true">Создать новый пост</my-button>
       </div>
@@ -20,16 +22,26 @@
       <create-post-form @createPost="createPost" />
     </my-modal>
 
-    <div v-if="!posts.length" class="alert">Список постов пуст!</div>
+    <transition name="fade">
+      <div v-if="!posts.length" class="alert">Список постов пуст!</div>
+    </transition>
 
     <div>
       <div class="sort-wrapper">
-        <my-select v-model="selectedSort" :options="sortOptions" />
+        <transition name="fade">
+          <my-select
+          v-model="selectedSort"
+          :options="sortOptions"
+          v-if="posts.length"
+        />
+        </transition>
       </div>
       <post-list v-if="posts.length" :posts="posts" @removePost="removePost" />
     </div>
 
-    <my-loader v-if="loaderVisible" />
+    <transition name="fade">
+      <my-loader v-if="loaderVisible" />
+    </transition>
   </div>
 </template>
 <script>
@@ -52,17 +64,17 @@ export default {
       posts: [],
       modalVisible: false,
       loaderVisible: false,
-      selectedSort: '',
+      selectedSort: "",
       sortOptions: [
         {
-          value: 'title',
-          name: 'по заголовку'
+          value: "title",
+          name: "по заголовку",
         },
         {
-          value: 'body',
-          name: 'по описанию'
-        }
-      ]
+          value: "body",
+          name: "по описанию",
+        },
+      ],
     };
   },
 
@@ -81,19 +93,19 @@ export default {
     },
   },
 
-  computed: {
-    sortedPosts(){
-      return [...this.posts].sort((a, b) => a[this.selectedSort].localeCompare(b[this.selectedSort]))
-    }
-  },
-
-  // watch: {
-  //   selectedSort(newValue){
-  //     this.posts.sort((a, b) => {
-  //       return a[newValue].localeCompare(b[newValue]);
-  //     })
+  // computed: {
+  //   sortedPosts(){
+  //     return [...this.posts].sort((a, b) => a[this.selectedSort].localeCompare(b[this.selectedSort]))
   //   }
-  // }
+  // },
+
+  watch: {
+    selectedSort(newValue) {
+      this.posts.sort((a, b) => {
+        return a[newValue].localeCompare(b[newValue]);
+      });
+    },
+  },
 };
 </script>
 
@@ -141,5 +153,17 @@ body {
   100% {
     opacity: 0;
   }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  opacity: 1;
+  transform: scale(1);
+  transition: .5s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+  transform: scale(0);
 }
 </style>
