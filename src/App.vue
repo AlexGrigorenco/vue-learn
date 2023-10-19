@@ -81,13 +81,19 @@ export default {
     },
   },
 
-  watch: {
-    selectedSort(newValue){
-      this.posts.sort((a, b) => {
-        return a[newValue].localeCompare(b[newValue])
-      })
+  computed: {
+    sortedPosts(){
+      return [...this.posts].sort((a, b) => a[this.selectedSort].localeCompare(b[this.selectedSort]))
     }
-  }
+  },
+
+  // watch: {
+  //   selectedSort(newValue){
+  //     this.posts.sort((a, b) => {
+  //       return a[newValue].localeCompare(b[newValue]);
+  //     })
+  //   }
+  // }
 };
 </script>
 
