@@ -1,5 +1,7 @@
 <template>
-    <div class="post">
+    <div 
+    @click="openPostInModal"
+    class="post">
         <div>
             <div><strong>Название:</strong> {{ post.title }}</div>
         <div>
@@ -7,7 +9,7 @@
       </div>  
       <div>
         <my-button
-        @click="$emit('removePost', post)"
+        @click.stop="$emit('removePost', post)"
         >Удалить</my-button>
       </div>
         </div> 
@@ -23,6 +25,11 @@ export default {
             required: true,
         }
     },
+    methods: {
+      openPostInModal(){
+        this.$emit('openPostInModal', this.post)
+      }
+    }
 }
 </script>
 

@@ -51,12 +51,14 @@
 }
 .content{
     position: relative;
-    padding: 8px;
+    padding: 30px;
     border-radius: 8px;
     background: #fff;
 
     min-width: 200px;
     min-height: 200px;
+
+    max-width: 70%;
 }
 
 .close-modal{
