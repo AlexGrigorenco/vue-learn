@@ -1,11 +1,21 @@
 <template>
   <div class="container">
 
-    <div style="display: flex; justify-content: end;">
+    <div class="bttn-wrapper">
+      <div>
       <my-button
+    @click="getPostsFromApi">
+      получить посты
+    </my-button>
+    </div>
+      <div>
+        <my-button
       @click="modalVisible = true"
       >Создать новый пост</my-button>
+      </div>
     </div>
+
+    
 
     <my-modal 
     v-model:show="modalVisible">
@@ -23,13 +33,14 @@
     :posts="posts"
     @removePost="removePost" />
 
-    
+    <my-loader v-if="loaderVisible"/>
   </div>
 </template>
 <script>
 
 import PostList from "@/components/PostList";
 import CreatePostForm from "@/components/CreatePostForm";
+import { getPosts } from "@/api";
 
 export default {
   components: {
@@ -39,33 +50,9 @@ export default {
 
   data() {
     return {
-      posts: [
-        {
-          id: 1,
-          title: "JavaScript",
-          description:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore magni reprehenderit eaque a, odio eveniet, cumque doloribus velit beatae soluta vel dignissimos ex. Perspiciatis facilis distinctio a voluptates perferendis ea!",
-        },
-        {
-          id: 2,
-          title: "JavaScript",
-          description:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore magni reprehenderit eaque a, odio eveniet ex. Perspiciatis facilis distinctio a voluptates perferendis ea!",
-        },
-        {
-          id: 3,
-          title: "JavaScript",
-          description:
-            "Lorem ipsum dolor sit amet, cumque doloribus velit beatae soluta vel dignissimos consectetur adipisicing elit. Labore magni reprehenderit eaque a, odio eveniet, cumque doloribus velit beatae soluta vel dignissimos ex. Perspiciatis facilis distinctio a voluptates perferendis ea!",
-        },
-        {
-          id: 4,
-          title: "JavaScript",
-          description:
-            "Lorem ipsum dolor sit amet, cumque  a voluptates perferendis ea!",
-        },
-      ],
+      posts: [],
       modalVisible: false,
+      loaderVisible: false,
     };
   },
 
@@ -76,6 +63,11 @@ export default {
     },
     removePost(post){
       this.posts = this.posts.filter(postItem => postItem.id !== post.id);
+    },
+    async getPostsFromApi(){
+      this.loaderVisible = true;
+      this.posts = await getPosts();
+      this.loaderVisible = false;
     }
   },
 };
@@ -105,6 +97,13 @@ body {
   text-align: center;
   font-size: 26px;
   animation: pulse 1s linear infinite ;
+}
+.bttn-wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 @keyframes pulse {
   0%{

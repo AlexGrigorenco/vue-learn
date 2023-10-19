@@ -19,6 +19,7 @@ button {
   background: rgb(84, 162, 84);
   border: 1px solid rgb(84, 162, 84);
   color: #fff;
+  cursor: pointer;
 }
 button:hover {
   background: #fff;

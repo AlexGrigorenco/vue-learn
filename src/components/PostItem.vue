@@ -2,10 +2,13 @@
     <div 
     @click="openPostInModal"
     class="post">
-        <div>
-            <div><strong>Название:</strong> {{ post.title }}</div>
-        <div>
-          <strong>Описание:</strong> {{ post.description }}</div>        
+        <div class="post-content-wrapper">
+            <div class="title">
+               {{ post.title }}
+            </div>
+        <div class="post-text">
+           {{ post.body }}
+          </div>        
       </div>  
       <div>
         <my-button
@@ -40,15 +43,31 @@ export default {
   border-radius: 8px;
 
   display: flex;
-  align-items: center;
   justify-content: space-between;
   gap: 20px;
 }
 .post:hover {
   background: #f3f3f39c;
   border: 1px solid #6565655f;
+  box-shadow: 2px 2px 10px green;
   transition: 0.5s linear;
   cursor: default;
+  transform: translateY(-2px);
+}
+.title{
+  font-size: 20px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.post-text{
+  font-size: 18px;
+  line-height: 140%;
+}
+.post-content-wrapper{
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 30px;
 }
 
 

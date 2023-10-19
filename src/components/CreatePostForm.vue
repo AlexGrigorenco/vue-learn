@@ -7,7 +7,7 @@
         placeholder="Введите название поста"
       />
       <my-input
-        v-model:value="newPost.description"
+        v-model:value="newPost.body"
         type="text"
         placeholder="Введите описание поста"
       />
@@ -26,7 +26,7 @@ export default {
         return{
             newPost: {
                 title: '',
-                description: '',
+                body: '',
             }
         }
     },
@@ -37,7 +37,7 @@ export default {
 
         this.newPost = {
                 title: '',
-                description: '',
+                body: '',
             }
     }
   },
