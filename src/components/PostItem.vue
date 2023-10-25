@@ -79,5 +79,10 @@ export default {
     flex-direction: column;
     align-items: flex-end;
   }
+  .id {
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+}
 }
 </style>

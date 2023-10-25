@@ -26,10 +26,22 @@
             }
         },
 
+        created() {
+            window.addEventListener('keydown', this.onEscapeKey);
+        },
+        destroyed() {
+            window.removeEventListener('keydown', this.onEscapeKey);
+        },
+
         methods: {
             hideModal(){
                 this.$emit('update:show', false)
-            }
+            },
+            onEscapeKey(event) {
+                if (event.key === 'Escape' && this.show) {
+                    this.hideModal();
+                }
+            },
         }
         
     }
@@ -48,6 +60,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 10;
 }
 .content{
     position: relative;
