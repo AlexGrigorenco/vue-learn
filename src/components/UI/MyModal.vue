@@ -55,7 +55,7 @@
     border-radius: 8px;
     background: #fff;
 
-    min-width: 200px;
+    min-width: 50%;
     min-height: 200px;
 
     max-width: 70%;

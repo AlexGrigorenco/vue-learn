@@ -35,8 +35,11 @@
           v-if="posts.length"
         />
         </transition>
+        <transition name="fade">
+          <my-input v-model:value="searchQuery" placeholder="поиск..." />
+        </transition>
       </div>
-      <post-list v-if="posts.length" :posts="posts" @removePost="removePost" />
+      <post-list v-if="posts.length" :posts="sortedPosts" @removePost="removePost" />
     </div>
 
     <transition name="fade">
@@ -75,6 +78,7 @@ export default {
           name: "по описанию",
         },
       ],
+      searchQuery:'',
     };
   },
 
@@ -93,11 +97,11 @@ export default {
     },
   },
 
-  // computed: {
-  //   sortedPosts(){
-  //     return [...this.posts].sort((a, b) => a[this.selectedSort].localeCompare(b[this.selectedSort]))
-  //   }
-  // },
+  computed: {
+    sortedPosts(){
+      return this.posts.filter(post => post.title.toLowerCase().includes(this.searchQuery.toLowerCase()));
+    }
+  },
 
   watch: {
     selectedSort(newValue) {

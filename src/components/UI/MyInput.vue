@@ -32,7 +32,7 @@ input {
   padding: 6px 4px;
   font-size: 18px;
   border-radius: 8px;
-  border: 1px solid #656565;
+  border: 1px solid green;
 }
 input::placeholder{
     font-size: 14px;
