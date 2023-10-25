@@ -55,7 +55,7 @@ export default {
   gap: 20px;
 }
 
-
+.post-move,
 .post-enter-active,
 .post-leave-active {
   transition: all .5s linear;
@@ -67,6 +67,9 @@ export default {
 .post-leave-active.post-leave-to {
   opacity: 0;
   transform: translateX(-100%) scale(0);
+}
+.post-leave-active{
+  position: absolute;
 }
 
 </style>
