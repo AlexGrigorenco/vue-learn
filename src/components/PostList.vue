@@ -1,7 +1,7 @@
 <template>
   <div class="post-wrapper">
     <h3>Список Постов</h3>
-    <transition-group name="list">
+    <transition-group name="post">
       <post-item
         @openPostInModal="openPostInModal"
         v-for="post in posts"
@@ -55,24 +55,18 @@ export default {
   gap: 20px;
 }
 
-.list-item {
-}
-.list-enter-active,
-.list-leave-active {
-  transition: all 1s ease;
-}
-.list-enter-from{
-    opacity: 0;
-    transform: translateX(100%);
-}
-.list-leave-to {
-    opacity: 0;
-  transform: scale(0);
-}
 
-.list-list-move {
-  transition: transform 0.8s ease;
+.post-enter-active,
+.post-leave-active {
+  transition: all .5s linear;
 }
-
+.post-enter-from{
+  opacity: 1;
+  transform: translateX(100%) scale(0);
+}
+.post-leave-active.post-leave-to {
+  opacity: 0;
+  transform: translateX(-100%) scale(0);
+}
 
 </style>
