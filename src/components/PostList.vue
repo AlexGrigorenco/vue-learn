@@ -45,6 +45,7 @@ export default {
       this.modalVisible = false;
     },
   },
+  emits: ['removePost'],
 };
 </script>
 

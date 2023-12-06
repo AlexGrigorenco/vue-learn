@@ -142,16 +142,7 @@
   };
   </script>
   
-  <style>
-  .container {
-    max-width: 1200px;
-    padding: 0 16px;
-    margin: 0 auto;
-  
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
+  <style scoped>
   .alert {
     color: red;
     text-align: center;
@@ -179,6 +170,7 @@
     display: flex;
     gap: 10px;
     justify-content: center;
+    flex-wrap: wrap;
   }
   .page {
     padding: 6px;

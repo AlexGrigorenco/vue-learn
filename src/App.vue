@@ -2,7 +2,6 @@
   <div id="app">
     <nav-bar></nav-bar>
     <router-view></router-view>
-    <router-view></router-view>
   </div>
 </template>
 
@@ -23,5 +22,11 @@ import NavBar from '@/components/Navbar.vue'
   }
   body {
     font-size: 20px;
+    overflow-x: hidden;
+  }
+  .container {
+    max-width: 1200px;
+    padding: 0 16px;
+    margin: 0 auto;
   }
 </style>

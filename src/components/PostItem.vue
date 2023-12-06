@@ -81,6 +81,7 @@ export default {
   }
   .id {
   position: absolute;
+  width: max-content;
   left: 20px;
   bottom: 20px;
 }
