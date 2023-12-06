@@ -1,9 +1,9 @@
 
 import axios from "axios";
 
-export async function getPosts(page) {
+export async function getPosts(amount, page) {
     try {
-        const response = await axios.get(`https://jsonplaceholder.typicode.com/posts?_limit=10&_page=${page}`);
+        const response = await axios.get(`https://jsonplaceholder.typicode.com/posts?_limit=${amount}&_page=${page}`);
         return response.data;
     }
     catch (err){

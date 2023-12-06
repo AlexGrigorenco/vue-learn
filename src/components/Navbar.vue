@@ -47,7 +47,6 @@ export default {
   },
   methods: {
     checkWindowWidth(){
-      console.log(this.displayMobile)
       this.displayMobile = window.innerWidth > 500 ? true : false;
       this.menuMobileActive = false;
     },

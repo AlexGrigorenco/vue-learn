@@ -109,7 +109,7 @@
       },
       async getPostsFromApi(page) {
         this.loaderVisible = true;
-        this.posts = await getPosts(page);
+        this.posts = await getPosts(10, page);
         this.loaderVisible = false;
       },
       prevPage() {
