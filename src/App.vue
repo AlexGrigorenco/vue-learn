@@ -29,4 +29,15 @@ import NavBar from '@/components/Navbar.vue'
     padding: 0 16px;
     margin: 0 auto;
   }
+  .fade-enter-active,
+.fade-leave-active {
+  opacity: 1;
+  transform: scale(1);
+  transition: 0.5s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+  transform: scale(0);
+}
 </style>

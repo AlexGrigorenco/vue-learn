@@ -11,14 +11,17 @@
         {{ post.body }}
       </div>
     </div>
-    <div>
+    <div class="button-wrapper">
       <my-button @click.stop="$emit('removePost', post)">Удалить</my-button>
+      <my-button @click="$router.push(`/post/${post.id}`)">открыть</my-button>
     </div>
   </div>
 </template>
 
 <script>
+import MyButton from './UI/MyButton.vue';
 export default {
+  components: { MyButton },
   props: {
     post: {
       type: Object,
@@ -68,6 +71,12 @@ export default {
   padding: 30px;
 }
 
+.button-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .id {
   position: absolute;
   right: 20px;
@@ -79,6 +88,9 @@ export default {
     flex-direction: column;
     align-items: flex-end;
   }
+  .button-wrapper {
+  flex-direction: row;
+}
   .id {
   position: absolute;
   width: max-content;

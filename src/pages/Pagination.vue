@@ -203,17 +203,5 @@
       opacity: 0;
     }
   }
-  
-  .fade-enter-active,
-  .fade-leave-active {
-    opacity: 1;
-    transform: scale(1);
-    transition: .5s ease;
-  }
-  .fade-enter-from,
-  .fade-leave-to {
-    opacity: 0;
-    transform: scale(0);
-  }
   </style>
   
