@@ -15,7 +15,9 @@
         @removePost="removePost"
       />
     </div>
-    <div ref="observer" class="observer"></div>
+    <div ref="observer" class="observer">
+        <div v-if="loaderVisible" class="loader"></div>
+    </div>
     <div class="bttn-wrapper">
       <transition name="fade">
         <div v-if="!posts.length">
@@ -31,9 +33,6 @@
 
     <transition name="fade">
       <div v-if="!posts.length" class="alert">Список постов пуст!</div>
-    </transition>
-    <transition name="fade">
-      <my-loader v-if="loaderVisible" />
     </transition>
   </div>
 </template>
@@ -132,18 +131,47 @@ export default {
 
 .observer {
   height: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-@keyframes pulse {
-  0% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
+.loader {
+    position: relative;
+    width: 10px;
+    height: 10px;
+    background: rgba(41, 85, 20, 0.9);
+    animation: scale 1s linear infinite;
+}
+.loader::after,
+.loader::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 10px;
+    height: 10px;
+    background: inherit;
+}
+.loader::after {
+    left: -30px;
+    animation: scale .5s linear infinite;
+}
+.loader::before {
+    right: -30px;
+    animation: scale 1.5s linear infinite;
+}
+
+@keyframes scale {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(.3);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 </style>
   

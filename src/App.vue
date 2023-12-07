@@ -40,4 +40,16 @@ import NavBar from '@/components/Navbar.vue'
   opacity: 0;
   transform: scale(0);
 }
+
+@keyframes pulse {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
 </style>
