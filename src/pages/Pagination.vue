@@ -47,7 +47,7 @@
           />
           </transition>
           <transition name="fade">
-            <my-input v-model:value="searchQuery" placeholder="поиск..." />
+            <my-input v-focus v-model:value="searchQuery" placeholder="поиск..." />
           </transition>
         </div>
         </div>

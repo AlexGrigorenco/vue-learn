@@ -1,5 +1,4 @@
-export default {
-    
+export default {    
     mounted(el, binding) {
       const options = {
         root: null,
@@ -16,5 +15,6 @@ export default {
       const observer = new IntersectionObserver(callback, options);
       observer.observe(el);
     },
+    name: 'intersection'
   };
   
