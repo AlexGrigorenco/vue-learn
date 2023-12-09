@@ -15,7 +15,7 @@
         @removePost="removePost"
       />
     </div>
-    <div ref="observer" class="observer">
+    <div v-intersection="getPostsFromApi" class="observer">
         <div v-if="loaderVisible" class="loader"></div>
     </div>
     <div class="bttn-wrapper">
@@ -45,22 +45,6 @@ export default {
     PostList,
   },
 
-  mounted() {
-    const options = {
-      root: null,
-      rootMargin: "30px",
-      threshold: 1.0,
-    };
-    const callback = (entries, observer) => {
-      if (entries[0].isIntersecting && this.postsBlock <= 20) {
-        this.getPostsFromApi(this.postsBlock);
-        this.postsBlock += 1;
-      }
-    };
-    const observer = new IntersectionObserver(callback, options);
-    observer.observe(this.$refs.observer);
-  },
-
   data() {
     return {
       posts: [],
@@ -86,10 +70,14 @@ export default {
     removePost(post) {
       this.posts = this.posts.filter((postItem) => postItem.id !== post.id);
     },
-    async getPostsFromApi(page) {
+    async getPostsFromApi() {
+      if(this.postsBlock > 20){
+        return
+      }
       this.loaderVisible = true;
-      const newPosts = await getPosts(5, page);
+      const newPosts = await getPosts(5, this.postsBlock);
       this.posts = [...this.posts, ...newPosts];
+      this.postsBlock += 1;
       this.loaderVisible = false;
     },
   },
